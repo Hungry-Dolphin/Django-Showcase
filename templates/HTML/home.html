@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block body %}
-    Hire me plox
+    {% for chat in chat_rooms %}
+        <a href="chat/{{ chat.id }}"> {{ chat.name }}</a> <br>
+    {% endfor %}
 {% endblock %}
 

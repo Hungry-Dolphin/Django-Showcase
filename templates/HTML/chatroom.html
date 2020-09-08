@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Chatroom</title>
+{% endblock %}
+
+{% block body %}
+    This is a chat
+    {% for chat_message in message_stream %}
+        {{ chat_message.user.username }} {{ chat_message.created_at }}
+        <br>
+        {{ chat_message.content }}
+        <br>
+    {% endfor %}
+{% endblock %}
+

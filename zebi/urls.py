@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 import chat.views as c_views
+import zebi.views as z_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('HTML/', include('chat.urls')),
-    path('', c_views.home, name='home')
+    path('chat/', include('chat.urls')),
+    path('accounts/login/', z_views.login, {'invalid': False}),
+    path('', c_views.home, name='home'),
 ]

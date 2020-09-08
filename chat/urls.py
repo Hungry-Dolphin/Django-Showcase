@@ -1,5 +1,6 @@
-
+from django.urls import include, path
+import chat.views as c
 
 urlpatterns = [
-    # path('result/show/<str:image_id>/', views.image_show, name='image_show'),
+    path('<str:chat_name>/', c.chatroom, name='chat_name'),
 ]
