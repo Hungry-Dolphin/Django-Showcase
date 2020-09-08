@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% block title %} {% endblock %}
+    <title>Base</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+</head>
+
+<body>
+
+{% for message in messages %}
+    {{ message }}
+{% endfor %}
+
+{% block body %} {% endblock %}
+<div id="footer">
+    <p>Feet lol</p>
+</div>
+
+</body>
+</html>
