@@ -5,7 +5,7 @@ User = get_user_model()
 
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField()
+    username = forms.CharField(label='Username')
     password = forms.CharField(widget=forms.PasswordInput)
 
     def clean(self, *args, **kwargs):
@@ -37,16 +37,11 @@ class UserRegisterForm(forms.ModelForm):
             'password1'
         ]
 
-    def check_password(self):
+    def clean(self, *args, **kwargs):
         password = self.cleaned_data.get('password')
         password1 = self.cleaned_data.get('password1')
         if password != password1:
             raise forms.ValidationError("Passwords don't match")
-        return password
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        email_qs = User.objects.filter(email=email)
-        if email_qs.exists:
-            raise forms.ValidationError('This email is already being used')
-        return email
+        if len(password) < 8:
+            raise forms.ValidationError("Passwords needs to have a minimum of 8 characters")
+        return super(UserRegisterForm, self).clean()
