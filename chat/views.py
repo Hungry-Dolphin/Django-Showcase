@@ -21,8 +21,19 @@ def chatroom(request, chat_name):
     user = request.user
     try:
         if int(user.profile.clearance) > chat_room.clearance:
+            if request.method == 'POST':
+                form = MessageForm(request.POST)
+                if form.is_valid():
+                    ChatMessage(
+                        user=user,
+                        send_in=chat_room,
+                        content=form.cleaned_data.get('content')
+                                ).save()
+                    return redirect(request.path_info)
             message_stream = ChatMessage.objects.all().filter(send_in=chat_room)
-            arguments = {'message_stream': message_stream}
+            arguments = {
+                'message_stream': message_stream,
+                'form': MessageForm()}
             return render(request, 'chat/chatroom.html', arguments)
         else:
             raise Http404

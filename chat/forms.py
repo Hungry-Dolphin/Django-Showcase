@@ -1,7 +1,18 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
+from .models import *
 
 User = get_user_model()
+
+
+class MessageForm(forms.ModelForm):
+    content = forms.CharField(max_length=500)
+
+    class Meta:
+        model = ChatMessage
+        fields = [
+            'content'
+        ]
 
 
 class UserLoginForm(forms.Form):
