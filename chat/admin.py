@@ -16,6 +16,7 @@ class ChatMessageAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
     list_display = ['send_in', 'created_at', 'content']
     search_fields = ['send_in', 'content']
+    list_filter = ['send_in', ]
 
 
 admin.site.register(ChatMessage, ChatMessageAdmin)

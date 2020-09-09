@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from chat.models import *
+from chat.forms import *
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+from django.contrib.auth import authenticate, get_user_model, login, logout
 
 
 @login_required
@@ -26,3 +28,20 @@ def chatroom(request, chat_name):
             raise Http404
     except chat_room.DoesNotExist:
         raise Http404
+
+
+def login_view(request):
+    re_dir = request.GET.get('next')
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            if re_dir:
+                return redirect(re_dir)
+            return redirect('/')
+    else:
+        form = UserLoginForm()
+    return render(request, 'auth/login.html', {'form': form})
