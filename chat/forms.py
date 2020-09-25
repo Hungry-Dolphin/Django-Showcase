@@ -35,9 +35,9 @@ class UserLoginForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
-    email = forms.EmailField(label='Email adress')
+    email = forms.EmailField(label='Email address')
     password = forms.CharField(widget=forms.PasswordInput)
-    password1 = forms.CharField(widget=forms.PasswordInput)
+    ConfirmPassword = forms.CharField(widget=forms.PasswordInput, label='Confirm password')
 
     class Meta:
         model = User
@@ -45,12 +45,12 @@ class UserRegisterForm(forms.ModelForm):
             'username',
             'email',
             'password',
-            'password1'
+            'ConfirmPassword'
         ]
 
     def clean(self, *args, **kwargs):
         password = self.cleaned_data.get('password')
-        password1 = self.cleaned_data.get('password1')
+        password1 = self.cleaned_data.get('ConfirmPassword')
         if password != password1:
             raise forms.ValidationError("Passwords don't match")
         if len(password) < 8:

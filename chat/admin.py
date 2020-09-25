@@ -14,7 +14,7 @@ admin.site.register(ChatRoom, ChatRoomAdmin)
 
 class ChatMessageAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
-    list_display = ['send_in', 'created_at', 'content']
+    list_display = ['send_in', 'created_at', 'user', 'content']
     search_fields = ['send_in', 'content']
     list_filter = ['send_in', ]
 
@@ -25,7 +25,7 @@ admin.site.register(ChatMessage, ChatMessageAdmin)
 class ProfileAdmin(admin.ModelAdmin):
     ordering = ('-user',)
     list_display = ['user', 'clearance']
-    search_fields = ['user', 'clearance']
+    search_fields = ['user']
     list_filter = ['clearance', ]
 
 

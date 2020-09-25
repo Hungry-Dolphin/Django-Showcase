@@ -6,8 +6,14 @@
 {% endblock %}
 
 {% block body %}
-    {% for chat in chat_rooms %}
-        <a href="chat/chatroom/{{ chat.id }}"> {{ chat.name }}</a> <br>
-    {% endfor %}
+    {% if chat_rooms %}
+        <ol style="font-size:4vw">
+            {% for chat in chat_rooms %}
+                <li><a href="chat/chatroom/{{ chat.id }}"> {{ chat.name }}</a></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <h1>There is nothing here</h1>
+    {% endif %}
 {% endblock %}
 

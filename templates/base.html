@@ -4,19 +4,34 @@
 <head>
     {% block title %} {% endblock %}
     <title>Base</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static "bootstrap.min.css" %}" rel="stylesheet" media="screen">
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
 </head>
 
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Home</a>
+        </div>
+        {% if user.is_authenticated %}
+            <a class="navbar-text" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a class="navbar-text" href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+</nav>
 
 {% for message in messages %}
     {{ message }}
 {% endfor %}
 
-{% block body %} {% endblock %}
-<div id="footer">
-    <p>Feet lol</p>
+<div class="container">
+    {% block body %} {% endblock %}
 </div>
+
+<script src="{% static "bootstrap.min.js" %}"></script>
 
 </body>
 </html>

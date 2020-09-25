@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block body %}
-    This is a chat
+    <div style="font-size:3vw">
+        This is the beginning of the chat:
+    </div>
     <br>
     {% for chat_message in message_stream %}
         {{ chat_message.user.username }} {{ chat_message.created_at }}

@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    <title>Login</title>
+    <title>Register</title>
 {% endblock %}
 
 {% block body %}
     <form method="post">
         {% csrf_token %}
-        {{ form }}
+        {% for requirement in form %}
+            {{ requirement.label }}
+            {{ requirement }}
+            <br>
+        {% endfor %}
         <button type="submit">register</button>
     </form>
 {% endblock %}
