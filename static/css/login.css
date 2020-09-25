@@ -1,0 +1,15 @@
+
+
+.register-link {
+    font-size: 1.5vw;
+}
+
+@media (max-width: 800px) {
+    * {
+        font-size: 5vw;
+    }
+
+    .register-link {
+        font-size: 3vw;
+    }
+}

@@ -21,7 +21,7 @@ def home(request):
 def chatroom(request, chat_name):
     chat_room = get_object_or_404(ChatRoom, id=chat_name)
     try:
-        if int(request.user.profile.clearance) > chat_room.clearance:
+        if int(request.user.profile.clearance) >= chat_room.clearance:
             if request.method == 'POST':
                 form = MessageForm(request.POST)
                 if form.is_valid():

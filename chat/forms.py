@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 class MessageForm(forms.ModelForm):
-    content = forms.CharField(max_length=500)
+    content = forms.CharField(max_length=500, label="Message:")
 
     class Meta:
         model = ChatMessage
@@ -16,8 +16,8 @@ class MessageForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(label='Username')
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label='Username:')
+    password = forms.CharField(widget=forms.PasswordInput, label='Password:')
 
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get('username')
@@ -35,9 +35,10 @@ class UserLoginForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
-    email = forms.EmailField(label='Email address')
-    password = forms.CharField(widget=forms.PasswordInput)
-    ConfirmPassword = forms.CharField(widget=forms.PasswordInput, label='Confirm password')
+    username = forms.CharField(max_length=24, label='Username:')
+    email = forms.EmailField(label='Email address:')
+    password = forms.CharField(widget=forms.PasswordInput, label='Password:')
+    ConfirmPassword = forms.CharField(widget=forms.PasswordInput, label='Confirm pass:')
 
     class Meta:
         model = User

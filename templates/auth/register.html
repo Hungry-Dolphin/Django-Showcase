@@ -5,13 +5,15 @@
 {% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% csrf_token %}
-        {% for requirement in form %}
-            {{ requirement.label }}
-            {{ requirement }}
-            <br>
-        {% endfor %}
-        <button type="submit">register</button>
-    </form>
+    <div id="form-div" class="container text-center">
+        <form method="post">
+            {% csrf_token %}
+            {% for requirement in form %}
+                {{ requirement.label }}
+                {{ requirement }}
+                <br>
+            {% endfor %}
+            <button class="rounded" type="submit">Register</button>
+        </form>
+    </div>
 {% endblock %}

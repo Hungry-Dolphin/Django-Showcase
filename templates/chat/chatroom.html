@@ -2,25 +2,34 @@
 {% load static %}
 {% block title %}
     <title>Chatroom</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}">
 {% endblock %}
 
 {% block body %}
-    <div style="font-size:3vw">
+    <div class="message-window">
         This is the beginning of the chat:
+
+        <br>
+        {% for chat_message in message_stream %}
+            <div class="container message">
+                {{ chat_message.user.username }} {{ chat_message.created_at }}
+                <br>
+                {{ chat_message.content }}
+            </div>
+        {% endfor %}
     </div>
     <br>
-    {% for chat_message in message_stream %}
-        {{ chat_message.user.username }} {{ chat_message.created_at }}
-        <br>
-        {{ chat_message.content }}
-        <br>
-    {% endfor %}
 
-    <br>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Post message</button>
-    </form>
+    <div class="container text-center">
+        <form method="post">
+            {% csrf_token %}
+            {% csrf_token %}
+            {% for requirement in form %}
+                {{ requirement.label }}
+                {{ requirement }}
+            {% endfor %}
+            <button type="submit">Post message</button>
+        </form>
+    </div>
 {% endblock %}
 

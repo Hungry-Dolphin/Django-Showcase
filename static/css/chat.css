@@ -1,0 +1,17 @@
+.message-window {
+    font-size: 3vw;
+}
+
+.message {
+    border: black solid 0.1vw;
+}
+
+@media (max-width: 800px) {
+    * {
+        font-size: 5vw;
+    }
+
+    .message-window {
+    font-size: 5vw;
+}
+}
