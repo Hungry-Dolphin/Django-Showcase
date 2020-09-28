@@ -13,7 +13,7 @@ def check_clearance(request, obj):
 
 def check_uuid(string):
     try:
-        temp = UUID(string)
+        UUID(string)
         return True
     except ValueError:
         return False
