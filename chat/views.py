@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
-from chat.forms import *
+from .forms import MessageForm, UserRegisterForm, UserLoginForm
+from .models import ChatRoom, ChatMessage, Profile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
-
-
-def get_default_arguments(request):
-    return {'user': request.user}
+from zebi.functions import check_clearance, check_uuid, get_default_arguments
 
 
 @login_required
@@ -19,26 +17,26 @@ def home(request):
 
 @login_required
 def chatroom(request, chat_name):
+    if not check_uuid(chat_name):
+        raise Http404
+
     chat_room = get_object_or_404(ChatRoom, id=chat_name)
-    try:
-        if int(request.user.profile.clearance) >= chat_room.clearance:
-            if request.method == 'POST':
-                form = MessageForm(request.POST)
-                if form.is_valid():
-                    ChatMessage(
-                        user=request.user,
-                        send_in=chat_room,
-                        content=form.cleaned_data.get('content')
-                                ).save()
-                    return redirect(request.path_info)
-            message_stream = ChatMessage.objects.all().filter(send_in=chat_room)
-            arguments = {**get_default_arguments(request),
-                         'message_stream': message_stream,
-                         'form': MessageForm()}
-            return render(request, 'chat/chatroom.html', arguments)
-        else:
-            raise Http404
-    except chat_room.DoesNotExist:
+    if check_clearance(request=request, obj=chat_room):
+        if request.method == 'POST':
+            form = MessageForm(request.POST)
+            if form.is_valid():
+                ChatMessage(
+                    user=request.user,
+                    send_in=chat_room,
+                    content=form.cleaned_data.get('content')
+                ).save()
+                return redirect(request.path_info)
+        message_stream = ChatMessage.objects.all().filter(send_in=chat_room)
+        arguments = {**get_default_arguments(request),
+                     'message_stream': message_stream,
+                     'form': MessageForm()}
+        return render(request, 'chat/chatroom.html', arguments)
+    else:
         raise Http404
 
 

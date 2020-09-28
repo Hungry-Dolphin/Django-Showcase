@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
-from .models import *
+from .models import ChatMessage
 
 User = get_user_model()
 

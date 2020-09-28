@@ -16,6 +16,7 @@
 <nav class="navbar" style="">
         <div class="navbar-header">
             <a class="navbar-brand custom-nav-text" href="{% url 'home' %}">Home</a>
+            <a class="navbar-brand custom-nav-text" href="{% url 'library_home' %}">Library</a>
         </div>
         {% if user.is_authenticated %}
             <a class="align-content-end custom-nav-text" href="{% url 'logout' %}">Logout</a>

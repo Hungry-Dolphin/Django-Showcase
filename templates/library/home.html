@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    {% if chat_rooms %}
+    {% if books %}
         <ol style="font-size:4vw">
-            {% for chat in chat_rooms %}
-                <li><a href="{% url 'chat_name' chat_name=chat.id %}"> {{ chat.name }}</a></li>
+            {% for book in books %}
+                <li><a href="{% url 'book' book=book.id %}"> {{ book.title }}</a></li>
             {% endfor %}
         </ol>
     {% else %}

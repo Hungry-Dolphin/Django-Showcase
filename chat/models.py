@@ -1,12 +1,10 @@
 from django.db import models
-import uuid
+from uuid import uuid4
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 
 class ChatRoom(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=100)
     clearance = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
