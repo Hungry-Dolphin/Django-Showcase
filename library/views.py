@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from zebi.functions import check_clearance, get_default_arguments, check_uuid
 from django.contrib.auth.decorators import login_required
-from .models import Book
+from .models import Book, Comments
 from django.http import Http404, FileResponse
 from django.shortcuts import get_object_or_404
 
@@ -11,6 +11,20 @@ def home(request):
     all_books = Book.objects.all().filter(clearance__lte=request.user.profile.clearance)
     arguments = {**get_default_arguments(request), 'books': all_books}
     return render(request, 'library/home.html', arguments)
+
+
+@login_required()
+def book_details(request, book):
+    if not check_uuid(book):
+        raise Http404
+
+    book = get_object_or_404(Book, id=book)
+    if check_clearance(request, book):
+        comments = Comments.objects.all().filter(book=book)
+        arguments = {**get_default_arguments(request), 'book': book, 'comments': comments}
+        return render(request, 'library/book.html', arguments)
+    else:
+        return Http404
 
 
 @login_required

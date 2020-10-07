@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" >
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     {% block title %} {% endblock %}
     <title>Base</title>
@@ -13,7 +13,7 @@
 
 <body>
 <div class="container-fluid">
-<nav class="navbar" style="">
+    <nav class="navbar" style="">
         <div class="navbar-header">
             <a class="navbar-brand custom-nav-text" href="{% url 'home' %}">Home</a>
             <a class="navbar-brand custom-nav-text" href="{% url 'library_home' %}">Library</a>
@@ -23,8 +23,8 @@
         {% else %}
             <a class="align-content-end custom-nav-text" href="{% url 'login' %}">Login</a>
         {% endif %}
-</nav>
-
+    </nav>
+</div>
 {% for message in messages %}
     {{ message }}
 {% endfor %}

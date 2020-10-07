@@ -12,7 +12,7 @@
         <br>
         {% for chat_message in message_stream %}
             <div class="container message">
-                {{ chat_message.user.username }} {{ chat_message.created_at }}
+                {{ chat_message.user }} {{ chat_message.created_at }}
                 <br>
                 {{ chat_message.content }}
             </div>

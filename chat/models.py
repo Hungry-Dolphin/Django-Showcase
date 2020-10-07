@@ -14,7 +14,7 @@ class ChatRoom(models.Model):
 
 
 class ChatMessage(models.Model):
-    send_in = models.ForeignKey(ChatRoom, related_name='products', on_delete=models.CASCADE)
+    send_in = models.ForeignKey(ChatRoom, related_name='chatroom', on_delete=models.CASCADE)
     content = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -25,4 +25,4 @@ class ChatMessage(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    clearance = models.IntegerField(default=1)
+    clearance = models.PositiveIntegerField(default=1)
