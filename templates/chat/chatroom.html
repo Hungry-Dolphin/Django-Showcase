@@ -23,7 +23,6 @@
     <div class="container text-center">
         <form method="post">
             {% csrf_token %}
-            {% csrf_token %}
             {% for requirement in form %}
                 {{ requirement.label }}
                 {{ requirement }}

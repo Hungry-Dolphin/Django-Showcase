@@ -15,5 +15,15 @@
     {% else %}
         There is nothing here
     {% endif %}
+    <div class="container text-center">
+        <form method="post">
+            {% csrf_token %}
+            {% for requirement in form %}
+                {{ requirement.label }}
+                {{ requirement }}
+            {% endfor %}
+            <button type="submit">Post message</button>
+        </form>
+    </div>
 {% endblock %}
 

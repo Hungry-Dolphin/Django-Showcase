@@ -26,3 +26,7 @@ class ChatMessage(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     clearance = models.PositiveIntegerField(default=1)
+
+    def choices(self):
+        choice = [(x, f'{x}')for x in range(1, self.clearance+1)]
+        return choice

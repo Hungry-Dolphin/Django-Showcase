@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container text-center">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Post message</button>
+        </form>
+    </div>
+{% endblock %}
+
