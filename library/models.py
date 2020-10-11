@@ -33,6 +33,7 @@ class Book(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pdf = models.FileField(upload_to=upload, validators=[check_extension, check_size])
     clearance = models.IntegerField(default=1)
+    summary = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
         return self.title
@@ -43,7 +44,6 @@ class Book(models.Model):
 
 
 class Comments(models.Model):
-    bumps = models.PositiveIntegerField(default=0)
     book = models.ForeignKey(Book, related_name='book', on_delete=models.CASCADE)
     content = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)

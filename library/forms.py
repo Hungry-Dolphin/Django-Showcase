@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import Comments, Book, upload
+from .models import Comments, Book
 
 User = get_user_model()
 
 
 def validate_clearance():
+    # TODO add a check to see if the clearance data was not tampered with
     pass
 
 
@@ -28,11 +29,12 @@ class BookForm(forms.ModelForm):
         )
 
     title = forms.CharField(max_length=100, label="Title:")
-    pdf = forms.FileField()
+    pdf = forms.FileField(label="Pdf:")
     clearance = forms.ChoiceField(choices='', label="Clearance:", validators=[validate_clearance])
+    summary = forms.CharField(label="Summary:", widget=forms.Textarea())
 
     class Meta:
         model = Book
         fields = [
-            'title', 'pdf', 'clearance'
+            'title', 'pdf', 'clearance', 'summary'
         ]

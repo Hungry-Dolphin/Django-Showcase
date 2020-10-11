@@ -1,15 +1,35 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    <title>Home</title>
+    <title>Upload your book</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}">
 {% endblock %}
 
 {% block body %}
     <div class="container text-center">
-        <form method="post" enctype="multipart/form-data">
+        <form id="big-form-div" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form }}
-            <button type="submit">Post message</button>
+            {% for requirement in form %}
+                {% if requirement.label == "Summary:" %}
+                    {{ requirement.label }}
+                    <div id="summary-input">
+                        {{ requirement }}
+                        {% for error in requirement.errors %}
+                            <br>
+                            {{ requirement.errors.as_text }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ requirement.label }}
+                    {{ requirement }}
+                    {% for error in requirement.errors %}
+                        <br>
+                        {{ requirement.errors.as_text }}
+                    {% endfor %}
+                {% endif %}
+                <br>
+            {% endfor %}
+            <button type="submit">Upload book</button>
         </form>
     </div>
 {% endblock %}

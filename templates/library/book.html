@@ -2,19 +2,47 @@
 {% load static %}
 {% block title %}
     <title>{{ book.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/book.css' %}">
 {% endblock %}
 
 {% block body %}
-    <h1><a href="{% url 'book' book=book.id %}"> {{ book.title }}</a></h1>
+    <div id='Book-clickable' class="container text-center">
+        <a href="{% url 'book' book=book.id %}"> {{ book.title }}</a>
+    </div>
+
+    <div class="container text-center">
+        Uploaded by: {{ book.user }} at {{ book.uploaded_at }}
+    </div>
+
     <br>
+
+    {% if book.summary %}
+        <div class="container text-center">
+            {{ book.summary | linebreaks }}
+        </div>
+    {% else %}
+        <div class="container text-center">
+            This user has not provided a summary
+        </div>
+    {% endif %}
+
+    <br>
+
     {% if comments %}
         {% for comment in comments %}
-            {{ comment.bumps }} {{ comment.user }} {{ comment.created_at }}<br>
-            {{ comment.content }}
+            <div class="container message">
+                {{ comment.user }} {{ comment.created_at }}<br>
+                {{ comment.content }}
+            </div>
         {% endfor %}
     {% else %}
-        There is nothing here
+        <div class="container text-center">
+            This book has no comments
+        </div>
     {% endif %}
+
+    <br>
+
     <div class="container text-center">
         <form method="post">
             {% csrf_token %}

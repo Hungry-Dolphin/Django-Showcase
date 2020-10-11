@@ -16,7 +16,7 @@ class CommentsAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
     list_filter = ['book', 'user__username']
     search_fields = ['book', 'user__username', 'content', 'id']
-    list_display = ['book', 'created_at', 'id', 'bumps', 'content']
+    list_display = ['content', 'created_at', 'book',]
 
 
 admin.site.register(Comments, CommentsAdmin)

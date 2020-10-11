@@ -49,7 +49,7 @@ def upload_pdf(request):
             book.save()
             return redirect(home)
         else:
-            messages.error(request, "Error")
+            messages.error(request, "Please correct the errors below")
             arguments = {**get_default_arguments(request), 'form': form}
             return render(request, 'library/upload.html', arguments)
 

@@ -1,0 +1,22 @@
+#big-form-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2vw;
+}
+
+#summary-input {
+    font-size: 1vw;
+}
+
+@media (max-width: 800px) {
+    #big-form-div {
+        font-size: 4vw;
+    }
+
+    #summary-input {
+        font-size: 2vw;
+    }
+}
+
