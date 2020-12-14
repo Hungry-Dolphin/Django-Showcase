@@ -1,11 +1,14 @@
-A fun part time project i'm working on.
-See it as a PDF sharing forum I guess.
+# Django is fun 
 
-##BIG WORDS 
+See this website as a PDF sharing forum. 
 
-This project is also used to keep up my django knowledge 
+# Features 
+The default user profile has been expanded to contain the user his acces level. 
 
-TODO:
-1 Add the ability for users to bump comments. 
-2 add more functionality 
+Custom validators to make sure no unwanted files are uploaded 
 
+base.html 
+
+2 Seperate apps
+
+And more
